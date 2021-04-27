@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def postsList(request):
-    return HttpResponse('Hello there')
+    return render(request, 'posts/index.html', {'title': 'This is the first title from the app!'})
