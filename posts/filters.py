@@ -1,6 +1,9 @@
 from django_filters import FilterSet, CharFilter, DateFilter
 from .models import Post
 
+
+# PostFilter is using the django_filters library for filtering all the fields of the Post model
+# that aren't excluded in Meta class
 class PostFilter(FilterSet):
     title = CharFilter(field_name='title', lookup_expr='icontains', label='Optional. Post title contains.')
     content = CharFilter(field_name='content', lookup_expr='icontains', label='Optional. Post content contains')
@@ -9,4 +12,5 @@ class PostFilter(FilterSet):
 
     class Meta:
         model = Post
+        # exclude attribute excludes all the fields that don't need to be filtered by the PostFilter 
         exclude = ['user', 'link', 'created_date', 'updated_date']
