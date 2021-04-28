@@ -1,24 +1,40 @@
 {% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
+    <div class="container">
+        <br>
+        <hr>
+        <h4>Use the form below to filter the posts list</h4>
+        <form method="GET">
+            {{ postsFilter.form|crispy }}
+            <button type="submit" name="button" class="btn btn-primary btn-lg btn-block mt-2">Submit</button>
+        </form>
+        <hr>
+    </div>
     {% if posts %}
         <div class="container">
+
             <!-- Iterating through the lists of all posts and display them on the front-end -->
             {% for post in posts %}
                     <article class="media content-section mt-5">
                       <div class="media-body">
                         <div class="article-metadata">
-                          <a class="mr-2" href="#">{{ post.getUserFullName }} | {{ post.getAccountSocialNetwork }}</a>
-                          <small class="text-muted">{{ post.created_date|date:"F d, Y" }}</small>
+                          <a class="mr-2" href="#">{{ post.getUserFullName }} | {{ post.social_network }}</a>
+                          <small class="text-muted"> created date - {{ post.created_date|date:"F d, Y" }} - updated date: {{ post.updated_date|date:"F d, Y" }}</small>
                         </div>
                         <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
                         <p class="">{{ post.content }}</p>
+                        <h6>Lists: {% for list in post.user.lists.all %}{{ list }}, {% endfor %}</h6>
                         <h6>Link: <a href="{{ post.link }}">{{ post.link }}</a></h6>
                       </div>
                     </article>
             {% endfor %}
+            <hr>
+            <br>
+            <br>
         </div>
     {% else %}
-        <div class="container alert alert-info" role="alert">
+        <div class="container alert alert-info mt-5" role="alert">
             Sorry, there are currently no posts in our system!
         </div>
     {% endif %}

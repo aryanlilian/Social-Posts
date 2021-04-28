@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Author, List, Account, Post
+from .models import Author, List, Post
 from .forms import AuthorRegistrationForm
 
 
@@ -27,11 +27,6 @@ class AuthorAdmin(UserAdmin):
 
 @admin.register(List)
 class ListAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'created_date', 'updated_date',)
-
-
-@admin.register(Account)
-class AccountAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'created_date', 'updated_date',)
 
 
