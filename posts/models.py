@@ -55,14 +55,20 @@ class Post(models.Model):
     # the models.ForeignKey represents a One-to-Many relationship between the Post and the Author & the Post and the Account model.
     # on_delete=models.SET_NULL will keep the post on the database even if an author/user or account is deleted
     # by setting the One-to-Many fields to null
-    # db_index it's used to add indexes on the Post table to reduce the time of executing queries
+    # db_index=True it's used to add indexes on the Post table to reduce the time of executing queries
     user = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL, db_index=True)
     account = models.ForeignKey(Account, null=True, on_delete=models.SET_NULL, db_index=True)
     title = models.CharField(_('Title'), max_length=250, null=False, blank=False, db_index=True)
     content = models.TextField(_('Post content'), null=False, blank=False, db_index=True)
-    post_link = models.URLField(max_length=200)
+    link = models.URLField(max_length=200)
     created_date = models.DateTimeField(_('Created Date/Time'), auto_now_add=True, db_index=True)
     updated_date = models.DateTimeField(_('Updated Date/Time'), auto_now=True, db_index=True)
 
     def __str__(self):
         return f'{self.user.username} - {self.title}'
+
+    def getUserFullName(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+
+    def getAccountSocialNetwork(self):
+        return f'{self.account.social_network}'
