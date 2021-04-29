@@ -19,7 +19,7 @@ def postsList(request):
         posts = Post.objects.filter(
             user__in=authors, title__icontains=title, content__icontains=content,
             social_network__in=socialNetworks, created_date__range=[startDate, endDate]
-        ).order_by('-created_date')
+        ).order_by('-created_date') 
     else:
         posts = Post.objects.all().order_by('-created_date')
 

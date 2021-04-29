@@ -57,6 +57,7 @@ class TestPostsListView(BaseTest):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'posts/index.html')
 
+    # testing the POST requests and response for the postsList view function by checking if the filters are working correctly
     def test_posts_list_view_POST_filtering(self):
         posts_filtered_by_title = Post.objects.filter(title__icontains='some random').count()
         posts_filtered_by_content_incorect = Post.objects.filter(content__icontains='cnt').count()
