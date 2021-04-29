@@ -30,6 +30,8 @@ class Author(AbstractUser):
 # Post model represents the posts themselves, which will be rendered on the index page
 class Post(models.Model):
 
+    # For adding new social networks requires adding just a few fields on the Post model like
+    # (ImageField, TagsField, etc.) if it needs it and adding the network on the SocialNetwork choices class
     class SocialNetwork(models.TextChoices):
         FACEBOOK = 'Facebook'
         TWITTER = 'Twitter'

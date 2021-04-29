@@ -12,16 +12,15 @@ def postsList(request):
     if request.method == 'POST':
         # getting the inputs values from the POST request of the filtering form
         title, content, socialNetworks, startDate, endDate, peopleList = getValuesFromRequest(request)
-
         # getting the filtered authors objects by the lists form the db
         authors = Author.objects.filter(lists__in=peopleList) if peopleList else Author.objects.all()
         # getting the filtered Posts objects by the filtering form from the db
         posts = Post.objects.filter(
             user__in=authors, title__icontains=title, content__icontains=content,
             social_network__in=socialNetworks, created_date__range=[startDate, endDate]
-        ).order_by('-created_date') 
+        ).order_by('-created_date')[:1000]
     else:
-        posts = Post.objects.all().order_by('-created_date')
+        posts = Post.objects.all().order_by('-created_date')[:1000]
 
     # the context HashMap/Dictionary holds all the elements to be sent on the frontend
     context = {
