@@ -4,10 +4,45 @@
     <div class="container">
         <br>
         <hr>
-        <h4>Use the form below to filter the posts list</h4>
-        <form method="GET">
-            {{ postsFilter.form|crispy }}
-            <button type="submit" name="button" class="btn btn-primary btn-lg btn-block mt-2">Submit</button>
+        <h4 class="text-center mb-3">Use the form below to filter the posts list</h4>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" class="form-control" name="titleContains" placeholder="Filter by title" aria-label="Filter by title">
+              </div>
+              <div class="col">
+                <label for="content" class="form-label">Content</label>
+                <input type="text" id="content" class="form-control" name="contentContains" placeholder="Filter by content" aria-label="Filter by content">
+              </div>
+              <div class="col">
+                  <label for="network" class="form-label">Social Network</label>
+                  <select id="network" name="socialNetwork" class="form-control">
+                     <option value="">None</option>
+                     <option value="Facebook">Facebook</option>
+                     <option value="Twitter">Twitter</option>
+                  </select>
+              </div>
+              <div class="col">
+                  <label for="startDate" class="form-label">Stard Date | format: yyyy-mm-dd</label>
+                  <input type="text" id="startDate" class="form-control" name="startDate" placeholder="Filter by start date" aria-label="Filter by start date">
+              </div>
+              <div class="col">
+                  <label for="endDate" class="form-label">End Date | format: yyyy-mm-dd</label>
+                  <input type="text" id="endDate" class="form-control" name="endDate" placeholder="Filter by end date" aria-label="Filter by end date">
+              </div>
+            </div>
+            <h6 class="mt-2">Filter by Lists</h6>
+            {% for list in lists %}
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" name="authorsList" id="{{ list.title }}" value="{{ list.id }}">
+                  <label class="form-check-label" for="{{ list.title }}">{{ list.title }}</label>
+                </div>
+            {% endfor %}
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary mt-3" type="submit">Filter posts</button>
+            </div>
         </form>
         <hr>
     </div>

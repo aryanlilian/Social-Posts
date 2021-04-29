@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 # List model represents the lists that will hold the authors/users grouped and will be used for filtering posts
 class List(models.Model):
-    title = models.CharField(_('Title'), max_length=30, null=False, blank=False)
+    title = models.CharField(_('Title'), max_length=30, null=False, blank=False, unique=True)
     created_date = models.DateTimeField(_('Created Date/Time'), auto_now_add=True)
     updated_date = models.DateTimeField(_('Updated Date/Time'), auto_now=True)
 
