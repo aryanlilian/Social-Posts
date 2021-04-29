@@ -18,9 +18,9 @@ def postsList(request):
         posts = Post.objects.filter(
             user__in=authors, title__icontains=title, content__icontains=content,
             social_network__in=socialNetworks, created_date__range=[startDate, endDate]
-        ).order_by('-created_date')[:1000]
+        ).order_by('-created_date')
     else:
-        posts = Post.objects.all().order_by('-created_date')[:1000]
+        posts = Post.objects.all().order_by('-created_date')
 
     # the context HashMap/Dictionary holds all the elements to be sent on the frontend
     context = {

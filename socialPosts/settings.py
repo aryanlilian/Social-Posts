@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts.apps.PostsConfig',
-    'django_filters',
-    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -104,6 +102,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# setting the User model used by the project
 AUTH_USER_MODEL = 'posts.Author'
 
 # Internationalization
@@ -128,6 +127,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-# Crispy Temaplate pack
-CRISPY_TEMPLATE_PACK = 'bootstrap4'

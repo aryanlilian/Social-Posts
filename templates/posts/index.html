@@ -1,5 +1,4 @@
 {% extends 'posts/base.html' %}
-{% load crispy_forms_tags %}
 {% block content %}
     <div class="container">
         <br>
@@ -45,9 +44,7 @@
             </div>
         </form>
         <hr>
-    </div>
     {% if posts %}
-        <div class="container">
 
             <!-- Iterating through the lists of all posts and display them on the front-end -->
             {% for post in posts %}
@@ -67,7 +64,6 @@
             <hr>
             <br>
             <br>
-        </div>
     {% else %}
         <div class="container alert alert-info mt-5" role="alert">
             Sorry, there are no posts to be displayed!
@@ -75,4 +71,6 @@
             2. The second reason can be because there are no posts that match the filters.
         </div>
     {% endif %}
+
+    </div>
 {% endblock %}
